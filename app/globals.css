@@ -2,26 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@import "base.css";
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+:root {
+  --text: #000;
+  --input-text-color: #0008;
+  --input-text-hover-color: transparent;
+  --input-border-color: #0003;
+  --input-border-hover-color: #0005;
+  --input-bg-color: transparent;
+  --input-icon-color: #000;
+  --search-max-width: 250px;
+  --search-min-width: clamp(150px, 20vw, 250px);
+  --border-radius: 5px;
+  --transition-cubic-bezier: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-theme {
+  background: #121212;
+  --text: #fff;
+  --input-text-color: #fff8;
+  --input-text-hover-color: transparent;
+  --input-border-color: #fff3;
+  --input-border-hover-color: #fff5;
+  --input-bg-color: transparent;
+  --input-icon-color: #fff;
+  --search-max-width: 250px;
+  --search-min-width: clamp(150px, 20vw, 250px);
+  --border-radius: 5px;
+  --transition-cubic-bezier: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #0001;
+}
+
+.color-text {
+  color: var(--text) !important;
+}
+
+.background {
+  background: #fff;
+}
+
+body.dark-theme .background {
+  background: #fff1;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }
