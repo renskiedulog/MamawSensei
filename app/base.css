@@ -364,10 +364,6 @@ nav .search-icon svg {
   fill: var(--input-icon-color);
 }
 
-.showcase {
-  background-image: url("https://asuratoon.com/wp-content/uploads/2021/07/solomaxlevelnewbie.jpg");
-}
-
 .overlay {
   background: linear-gradient(to top, #121212, transparent);
 }

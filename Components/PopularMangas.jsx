@@ -1,11 +1,17 @@
 "use client";
-import { fetchCoverImages, fetchTopMangas } from "@/API/request";
+import {
+  fetchCoverImages,
+  fetchStats,
+  fetchTopMangas,
+  makeRequest,
+} from "@/API/request";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const PopularMangas = () => {
   const [toggle, setToggle] = useState(true);
   const [mangas, setMangas] = useState([]);
+  const [statistic, setStatistic] = useState([]);
 
   const handleToggle = (toggle) => {
     setToggle(toggle);
@@ -13,20 +19,24 @@ const PopularMangas = () => {
 
   useEffect(() => {
     setMangas([]);
+    setStatistic([]);
     const fetchData = async () => {
       try {
         const data = await fetchTopMangas(toggle);
         const getManga = await fetchCoverImages(data?.data);
+        const stats = await fetchStats(data?.data);
         setMangas(getManga);
+        setStatistic(stats);
       } catch (error) {
         console.error("Error fetching top mangas:", error);
       }
     };
-    // fetchData();
+    fetchData();
   }, [toggle]);
 
+  console.log(statistic);
   return (
-    <section className="w-full background rounded-md">
+    <div className="w-full background rounded-md">
       <header className="border-b-[1px] border-[#fff1] py-2 flex">
         <button className="px-3" onClick={() => handleToggle(true)}>
           Popular
@@ -37,10 +47,9 @@ const PopularMangas = () => {
       </header>
       {/* Mangas */}
       {mangas?.map((manga, index) => {
-        console.log(manga);
         return (
           <div
-            key={index}
+            key={manga?.manga?.attributes.title["en"]}
             className={`flex gap-2 p-2 ${
               index === 0 ? "" : "border-t border-[#fff1]"
             }`}
@@ -51,9 +60,10 @@ const PopularMangas = () => {
                 src={manga?.cover}
               />
             </Link>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col justify-around">
               <Link
                 href="#"
+                key={manga?.manga?.attributes.title["en"]}
                 className="hover:text-purple-500 md:text-base text-sm"
               >
                 {manga?.manga?.attributes.title["en"]
@@ -66,31 +76,41 @@ const PopularMangas = () => {
                   {manga?.manga?.attributes?.tags?.map((tag, index) => {
                     if (index <= 5) {
                       return (
-                        <>
-                          <Link className="hover:text-purple-500" href="#">
-                            {tag.attributes.name["en"]}
-                            {index != 5 && ","}
-                          </Link>
-                        </>
+                        <Link
+                          key={index}
+                          href="#"
+                          className="hover:text-purple-500"
+                        >
+                          {tag.attributes.name["en"]}
+                          {index !== 5 && ","}
+                        </Link>
                       );
                     }
                   })}
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                <p className="md:text-sm text-xs opacity-75">Rating:</p>
-                <p>9.9 </p>
-                <img
-                  src="/images/star.png"
-                  alt="rating"
-                  className="w-5 aspect-auto translate-y-[-1px]"
-                />
+                <p className="md:text-sm text-xs opacity-75">
+                  {toggle ? "Follows:" : "Rating:"}
+                </p>
+                <p className="md:text-sm text-xs">
+                  {toggle
+                    ? statistic[index].follows
+                    : statistic[index]?.rating?.average.toFixed(2)}
+                </p>
+                {!toggle && (
+                  <img
+                    src="/images/star.png"
+                    alt="rating"
+                    className="w-5 aspect-auto translate-y-[-1px]"
+                  />
+                )}
               </div>
             </div>
           </div>
         );
       })}
-    </section>
+    </div>
   );
 };
 

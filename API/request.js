@@ -13,7 +13,7 @@ export const makeRequest = async (endpoint, method = "GET", params = {}, filter 
 
     // Make the request
     try {
-        const res = await fetch(url);
+        const res = await fetch(url, { cache: 'force-cache', revalidate: 60 });
         if (!res.ok) {
             throw new Error(`HTTP error! Status: ${res.status}`);
         }
@@ -72,4 +72,15 @@ export const fetchTopMangas = async (toggle) => {
     } catch (err) {
         console.log(err);
     }
+};
+
+export const fetchStats = async (array) => {
+    const stats = await Promise.all(
+        array.map(async (manga) => {
+            const response = await makeRequest(`/statistics/manga/${manga?.id}`);
+            return response?.statistics[manga?.id];
+        })
+    )
+
+    return stats;
 };
