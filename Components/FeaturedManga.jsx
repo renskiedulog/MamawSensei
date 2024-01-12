@@ -14,9 +14,9 @@ const FeaturedManga = () => {
         const storedDate = new Date(date);
         const currentDate = new Date();
         if (
-          storedDate.getDate() === currentDate.getDate() &&
-          storedDate.getMonth() === currentDate.getMonth() &&
-          storedDate.getFullYear() === currentDate.getFullYear()
+          storedDate.getUTCDate() === currentDate.getUTCDate() &&
+          storedDate.getUTCMonth() === currentDate.getUTCMonth() &&
+          storedDate.getUTCFullYear() === currentDate.getUTCFullYear()
         ) {
           setFeaturedManga(manga[0]);
           return;
@@ -24,7 +24,6 @@ const FeaturedManga = () => {
       }
       const req = await makeRequest(
         "/manga/",
-        "GET",
         { limit: 100 },
         { followedCount: "desc", rating: "desc" }
       );
@@ -34,6 +33,7 @@ const FeaturedManga = () => {
         manga: newFeatured,
         date: new Date().toISOString().split("T")[0],
       };
+      console.log(new Date().toISOString().split("T")[0]);
 
       localStorage.setItem("featured", JSON.stringify(newFeaturedWithDate));
       setFeaturedManga(newFeatured[0]);
@@ -43,27 +43,19 @@ const FeaturedManga = () => {
   }, []);
 
   return (
-    <Link
-      href="#"
-      className="md:block hidden relative overflow-hidden group"
-      title={
-        featuredManga?.manga?.attributes?.title["en"]
-          ? featuredManga?.manga?.attributes?.title["en"]
-          : featuredManga?.manga?.attributes?.title["ja-ro"]
-      }
-    >
+    <Link href="#" className="md:block hidden relative overflow-hidden group">
       <img
-        className="absolute w-full h-[250px] rounded-r-md object-cover object-center brightness-75"
+        className="absolute w-full h-[250px] rounded-r-md object-cover object-center brightness-90"
         src={featuredManga?.cover}
       />
-      <div className="absolute w-full bg-red-500 rotate-45 md:text-base top-[8%] right-[-35%] text-center">
+      <div className="absolute w-full bg-red-500 rotate-45 md:text-base top-[8%] right-[-35%] text-center text-white">
         Featured
       </div>
-      <div className="absolute bottom-0 w-full overlay h-1/2 flex justify-end flex-col items-center pb-2 text-center transition-transform duration-300 transform translate-y-full group-hover:translate-y-0">
-        <h1 className="md:text-lg text-base h-[60px] text-white flex justify-center items-center">
-          {featuredManga?.manga?.attributes?.title["en"]
-            ? featuredManga?.manga?.attributes?.title["en"]
-            : featuredManga?.manga?.attributes?.title["ja-ro"]}
+      <div className="absolute bottom-0 w-full overlay h-full flex justify-end flex-col items-center pb-2 text-center transition-transform duration-300 transform translate-y-full group-hover:translate-y-0">
+        <h1 className="md:text-lg text-base h-max text-white flex justify-center items-center w-5/6">
+          {featuredManga?.attributes?.title["en"]
+            ? featuredManga?.attributes?.title["en"]
+            : featuredManga?.attributes?.title["ja-ro"]}
         </h1>
       </div>
     </Link>

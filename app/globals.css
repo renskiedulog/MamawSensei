@@ -49,6 +49,7 @@ body {
 
 .background {
   background: #fff;
+  box-shadow: 3px 3px 3px #0005;
 }
 
 body.dark-theme .background {

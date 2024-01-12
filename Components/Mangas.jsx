@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import MangaFeed from "./MangaFeed";
 
 const Mangas = () => {
   return (
@@ -13,6 +14,10 @@ const Mangas = () => {
           View All
         </Link>
       </header>
+      {/* Manga Feed */}
+      <div className="w-full h-auto p-5 gap-3 flex flex-wrap ">
+        <MangaFeed />
+      </div>
     </div>
   );
 };
