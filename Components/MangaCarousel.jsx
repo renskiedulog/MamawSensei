@@ -59,25 +59,25 @@ const MangaCarousel = ({ mangas }) => {
 
   return (
     <div
-      className="md:h-[250px] h-[200px] relative showcase bg-center bg-no-repeat bg-cover rounded-md md:rounded-r-none w-full flex items-start overflow-x-auto overflow-y-hidden snap-mandatory snap-x scrollbar-hidden transition-all"
+      className="showcase scrollbar-hidden relative flex h-[200px] w-full snap-x snap-mandatory items-start overflow-x-auto overflow-y-hidden rounded-md bg-cover bg-center bg-no-repeat transition-all md:h-[250px] md:rounded-r-none"
       ref={carouselRef}
     >
       {mangas.map((manga, index) => {
         return (
           <div
             key={index}
-            className="w-full flex-shrink-0 snap-start h-full backdrop-blur-sm backdrop-brightness-50 transition-all grid md:grid-cols-[75%,25%] grid-cols-[70%,30%] gap-1 items-center md:px-5 px-2"
+            className="grid h-full w-full flex-shrink-0 snap-start grid-cols-[70%,30%] items-center gap-1 px-2 backdrop-blur-sm backdrop-brightness-50 transition-all md:grid-cols-[75%,25%] md:px-5"
           >
             <img
               src={manga?.cover}
               alt="background"
-              className="absolute top-0 brightness-[.3] z-0 object-contain object-center bg-no-repeat w-full h-auto"
+              className="absolute top-0 z-0 h-auto w-full bg-no-repeat object-contain object-center brightness-[.3]"
             />
-            <div className="w-full z-10 md:self-center self-start">
-              <div className="p-2 flex items-center">
+            <div className="z-10 w-full self-start md:self-center">
+              <div className="flex items-center p-2">
                 <div>
                   <h1
-                    className="md:text-2xl text-lg text-white h-8 overflow-hidden"
+                    className="h-8 overflow-hidden text-lg text-white md:text-2xl"
                     title={
                       manga?.attributes.title["en"]
                         ? manga?.attributes.title["en"]
@@ -88,21 +88,21 @@ const MangaCarousel = ({ mangas }) => {
                       ? manga?.attributes.title["en"]
                       : manga?.attributes.title["ja-ro"]}
                   </h1>
-                  <h2 className="uppercase md:text-sm text-xs text-white flex gap-1">
+                  <h2 className="flex gap-1 text-xs uppercase text-white md:text-sm">
                     <p
-                      className={`w-min py-[2px] px-1 text-xs rounded bg-[#fff5]`}
+                      className={`w-min rounded bg-[#fff5] px-1 py-[2px] text-xs`}
                     >
                       {manga?.type}
                     </p>
                     {manga?.attributes?.publicationDemographic && (
                       <p
-                        className={`w-min py-[2px] px-1 text-xs rounded bg-[#fff5]`}
+                        className={`w-min rounded bg-[#fff5] px-1 py-[2px] text-xs`}
                       >
                         {manga?.attributes?.publicationDemographic}
                       </p>
                     )}
                     <p
-                      className={`w-min py-[2px] px-1 text-xs rounded ${
+                      className={`w-min rounded px-1 py-[2px] text-xs ${
                         contentTypeBg[manga?.attributes?.contentRating]
                       }`}
                     >
@@ -113,14 +113,14 @@ const MangaCarousel = ({ mangas }) => {
               </div>
               {/* Genres */}
               <div className="ml-2 flex flex-col gap-2">
-                <p className="md:text-sm text-xs text-ellipsis w-5/6 h-5 whitespace-nowrap overflow-hidden text-white">
+                <p className="h-5 w-5/6 overflow-hidden text-ellipsis whitespace-nowrap text-xs text-white md:text-sm">
                   {manga?.attributes?.tags?.map((tag, index) => {
                     if (index <= 5) {
                       return (
                         <Link
                           key={index}
                           href="#"
-                          className="hover:text-purple-500 mr-1"
+                          className="mr-1 hover:text-purple-500"
                         >
                           {tag.attributes.name["en"]}
                           {index !== 5 && ","}
@@ -129,26 +129,26 @@ const MangaCarousel = ({ mangas }) => {
                     }
                   })}
                 </p>
-                <h5 className="md:text-base text-sm font-semibold text-white">
+                <h5 className="text-sm font-semibold text-white md:text-base">
                   Summary
                 </h5>
                 <p
-                  className="md:text-sm text-xs font-light md:h-14 h-12 overflow-hidden w-full text-white line-clamp-3"
+                  className="line-clamp-3 h-12 w-full overflow-hidden text-xs font-light text-white md:h-14 md:text-sm"
                   title={manga?.attributes.description["en"]}
                 >
                   {manga?.attributes.description["en"]}
                 </p>
-                <p className="md:text-sm text-xs font-normal text-white flex gap-1 items-center">
+                <p className="flex items-center gap-1 text-xs font-normal text-white md:text-sm">
                   Status:
-                  <span className={`md:text-sm text-xs rounded uppercase`}>
+                  <span className={`rounded text-xs uppercase md:text-sm`}>
                     {manga?.attributes?.status}
                   </span>
                 </p>
               </div>
             </div>
-            <Link href="#" className="md:pr-0 pr-3">
+            <Link href={`/manga/${manga?.id}`} className="pr-3 md:pr-0">
               <img
-                className="md:w-full hover:scale-[1.03] relative z-10 aspect-auto rounded"
+                className="relative z-10 aspect-auto rounded hover:scale-[1.03] md:w-full"
                 src={manga?.cover}
                 alt="manga-link"
               />

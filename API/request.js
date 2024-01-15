@@ -85,6 +85,15 @@ export const fetchStats = async (array) => {
     return stats;
 };
 
+export const fetchMangaInfo = async (mangaId) => {
+    const req = await makeRequest(`/manga/${mangaId}`);
+    const cover = await fetchCoverImages([req.data]);
+    const stats = await makeRequest(`/statistics/manga/${mangaId}`);
+
+    Object.assign(cover[0], { stats: stats.statistics[mangaId] });
+    return cover;
+}
+
 export function timeAgo(dateString) {
     const providedDate = new Date(dateString);
     const now = new Date();

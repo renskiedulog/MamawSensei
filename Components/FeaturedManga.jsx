@@ -1,5 +1,5 @@
 "use client";
-import { fetchCoverImages, makeRequest } from "@/API/request";
+import { fetchCoverImages, makeRequest } from "../API/request";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -25,7 +25,7 @@ const FeaturedManga = () => {
       const req = await makeRequest(
         "/manga/",
         { limit: 100 },
-        { followedCount: "desc", rating: "desc" }
+        { followedCount: "desc", rating: "desc" },
       );
       const randomIndex = Math.floor(Math.random() * 100);
       const newFeatured = await fetchCoverImages([req?.data[randomIndex]]);
@@ -33,7 +33,6 @@ const FeaturedManga = () => {
         manga: newFeatured,
         date: new Date().toISOString().split("T")[0],
       };
-      console.log(new Date().toISOString().split("T")[0]);
 
       localStorage.setItem("featured", JSON.stringify(newFeaturedWithDate));
       setFeaturedManga(newFeatured[0]);
@@ -43,16 +42,19 @@ const FeaturedManga = () => {
   }, []);
 
   return (
-    <Link href="#" className="md:block hidden relative overflow-hidden group">
+    <Link
+      href={`/manga/${featuredManga?.id}`}
+      className="group relative hidden overflow-hidden md:block"
+    >
       <img
-        className="absolute w-full h-[250px] rounded-r-md object-cover object-center brightness-90"
+        className="absolute h-[250px] w-full rounded-r-md object-cover object-center brightness-90"
         src={featuredManga?.cover}
       />
-      <div className="absolute w-full bg-red-500 rotate-45 md:text-base top-[8%] right-[-35%] text-center text-white">
+      <div className="absolute right-[-35%] top-[8%] w-full rotate-45 bg-red-500 text-center text-white md:text-base">
         Featured
       </div>
-      <div className="absolute bottom-0 w-full overlay h-full flex justify-end flex-col items-center pb-2 text-center transition-transform duration-300 transform translate-y-full group-hover:translate-y-0">
-        <h1 className="md:text-lg text-base h-max text-white flex justify-center items-center w-5/6">
+      <div className="overlay absolute bottom-0 flex h-full w-full translate-y-full transform flex-col items-center justify-end pb-2 text-center transition-transform duration-300 group-hover:translate-y-0">
+        <h1 className="flex h-max w-5/6 items-center justify-center text-base text-white md:text-lg">
           {featuredManga?.attributes?.title["en"]
             ? featuredManga?.attributes?.title["en"]
             : featuredManga?.attributes?.title["ja-ro"]}

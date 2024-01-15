@@ -4,18 +4,18 @@ import MangaFeed from "./MangaFeed";
 
 const Mangas = () => {
   return (
-    <div className="w-full h-full background rounded">
-      <header className="flex justify-between px-2 md:py-2 py-1 items-center border-b border-[#fff2]">
-        <p className="md:text-lg text-md">Latest</p>
+    <div className="background h-full w-full rounded">
+      <header className="flex items-center justify-between border-b border-[#fff2] px-2 py-1 md:py-2">
+        <p className="text-md md:text-lg">Latest</p>
         <Link
           href="#"
-          className="px-2 py-1 bg-purple-500 rounded md:text-sm text-xs text-white"
+          className="rounded bg-purple-500 px-2 py-1 text-xs text-white md:text-sm"
         >
           View All
         </Link>
       </header>
       {/* Manga Feed */}
-      <div className="w-full h-auto p-5 gap-3 flex flex-wrap ">
+      <div className="flex h-auto w-full flex-wrap gap-3 p-5">
         <MangaFeed />
       </div>
     </div>
