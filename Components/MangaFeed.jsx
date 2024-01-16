@@ -17,7 +17,7 @@ export const MangaFeed = async () => {
   return mangas.map((manga, index) => (
     <Link
       key={index}
-      className="group w-20 max-w-[7.5rem] flex-grow overflow-hidden hover:scale-[1.01] md:w-28"
+      className="group w-20 max-w-36 flex-grow overflow-hidden hover:scale-[1.01] md:w-28"
       href={`/manga/${manga.id}`}
     >
       <img

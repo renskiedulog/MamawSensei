@@ -21,9 +21,9 @@ export const makeRequest = async (endpoint, params = {}, filter = {}, config = {
     }
 };
 
-export const getFilter = async (filter, limit) => {
+export const getFilter = async (filter) => {
     const includedTagNames = [filter];
-    const tags = await makeRequest("/manga/tag", "GET", {}, {});
+    const tags = await makeRequest("/manga/tag");
     const includedTagIDs = tags?.data?.data
         .filter((tag) => includedTagNames.includes(tag.attributes.name.en))
         .map((tag) => tag.id);
@@ -90,8 +90,8 @@ export const fetchMangaInfo = async (mangaId) => {
     const cover = await fetchCoverImages([req.data]);
     const stats = await makeRequest(`/statistics/manga/${mangaId}`);
 
-    Object.assign(cover[0], { stats: stats.statistics[mangaId] });
-    return cover;
+    Object.assign(cover[0], { stats: stats?.statistics[mangaId] });
+    return cover[0];
 }
 
 export function timeAgo(dateString) {

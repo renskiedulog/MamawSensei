@@ -13,12 +13,10 @@ export const metadata = {
 export default function RootLayout({ children, modal }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>
+      <body className={`${roboto.className} relative`}>
         <NavBar />
         {children}
-        {/* <div className="pointer-events-none fixed left-1/2 top-1/2 h-4/5 w-4/5 translate-x-[-50%] translate-y-[-50%]">
-          {modal}
-        </div> */}
+        <div className="flex items-center justify-center">{modal}</div>
         <Footer />
       </body>
     </html>
