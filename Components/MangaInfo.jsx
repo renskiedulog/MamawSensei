@@ -91,43 +91,43 @@ const MangaInfo = ({ manga, modal }) => {
         <div className="my-2 flex flex-wrap items-center justify-center gap-1 md:justify-start">
           <Link
             href="#"
-            class="flex min-w-20 items-center gap-2 rounded bg-indigo-700 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
+            className="flex min-w-20 items-center gap-2 rounded bg-indigo-700 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
           >
-            <i class="fa-brands fa-facebook-f"></i>
+            <i className="fa-brands fa-facebook-f"></i>
             Facebook
           </Link>
           <Link
             href="#"
-            class="flex min-w-20 items-center gap-2 rounded bg-blue-500 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
+            className="flex min-w-20 items-center gap-2 rounded bg-blue-500 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
           >
-            <i class="fa-brands fa-twitter"></i>
+            <i className="fa-brands fa-twitter"></i>
             Twitter
           </Link>
           <Link
             href="#"
-            class="flex min-w-20 items-center gap-2 rounded bg-green-500 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
+            className="flex min-w-20 items-center gap-2 rounded bg-green-500 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
           >
-            <i class="fa-brands fa-whatsapp"></i>
+            <i className="fa-brands fa-whatsapp"></i>
             Whatsapp
           </Link>
           <Link
             href="#"
-            class="flex min-w-20 items-center gap-2 rounded bg-indigo-500 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
+            className="flex min-w-20 items-center gap-2 rounded bg-indigo-500 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
           >
-            <i class="fa-brands fa-discord"></i>
+            <i className="fa-brands fa-discord"></i>
             Discord
           </Link>
           <Link
             href="#"
-            class="flex min-w-20 items-center gap-2 rounded bg-red-700 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
+            className="flex min-w-20 items-center gap-2 rounded bg-red-700 px-2 py-1 text-xs font-normal tracking-wide text-white hover:scale-105"
           >
-            <i class="fa-brands fa-pinterest"></i>
+            <i className="fa-brands fa-pinterest"></i>
             Pinterest
           </Link>
         </div>
         <div>
-          <h1 className="py-1 text-sm md:text-base">Sypnosis:</h1>
-          <p className="mt-1 pr-5 text-xs font-light opacity-80 md:text-base">
+          <h1 className="py-1 md:text-base">Sypnosis:</h1>
+          <p className="mt-1 pr-5 text-sm font-light opacity-80 md:text-base">
             {manga?.attributes?.description["en"]}
           </p>
           <div className="grid h-max grid-cols-2 py-2 text-sm md:text-base">

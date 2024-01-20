@@ -1,6 +1,7 @@
 import { fetchMangaInfo, fetchTopMangas } from "../../../API/request";
 import PopularMangas from "../../../Components/PopularMangas";
 import MangaInfo from "../../../Components/MangaInfo";
+import Chapters from "../../../Components/Chapters";
 import Link from "next/link";
 
 const page = async ({ params }) => {
@@ -22,6 +23,8 @@ const page = async ({ params }) => {
         </div>
         {/* Manga Info */}
         <MangaInfo manga={manga} />
+        {/* Manga Chapters */}
+        <Chapters mangaId={params.id} />
       </div>
       <PopularMangas mangas={popular} />
     </div>

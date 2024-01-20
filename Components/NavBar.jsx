@@ -2,8 +2,17 @@
 import Link from "next/link";
 import ToggleSwitch from "./ToggleSwitch";
 import SearchBox from "./SearchBox";
+import { getRandomManga } from "../API/request";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
+  const router = useRouter();
+
+  const randomize = async () => {
+    const id = await getRandomManga();
+    router.push(`/manga/${id}`);
+  };
+
   return (
     <nav className="mx-auto max-w-screen-2xl">
       {/* Logo And Search : Top */}
@@ -26,7 +35,7 @@ const NavBar = () => {
         {/* Left Side : User Related */}
         <div className="flex">
           <Link
-            href="#"
+            href="/"
             className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
           >
             Home
@@ -60,6 +69,7 @@ const NavBar = () => {
           </Link>
           <button
             type="button"
+            onClick={() => randomize()}
             className="mx-2 rounded bg-purple-800 px-5 py-1 text-xs hover:scale-105 md:text-base"
           >
             Random

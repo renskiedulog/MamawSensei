@@ -10,13 +10,13 @@ export const metadata = {
   description: "Your Favorite Manga / Manhwa / Manhua / Webtoon In One Site.",
 };
 
-export default function RootLayout({ children, modal }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${roboto.className} relative`}>
         <NavBar />
         {children}
-        <div className="flex items-center justify-center">{modal}</div>
+        {/* <div className="flex items-center justify-center">{modal}</div> */}
         <Footer />
       </body>
     </html>

@@ -31,9 +31,11 @@ export const MangaFeed = async () => {
       >
         {manga.attributes.title["en"] || manga.attributes.title["ja-ro"]}
       </p>
-      <p className="text-center text-xs opacity-70">
-        {timeAgo(manga?.attributes?.updatedAt)}
-      </p>
+      {timeAgo(manga?.attributes?.updatedAt) !== null && (
+        <p className="text-center text-xs opacity-70">
+          {timeAgo(manga?.attributes?.updatedAt)}
+        </p>
+      )}
     </Link>
   ));
 };

@@ -58,11 +58,10 @@ const PopularMangas = ({ mangas }) => {
               <Link
                 href={`/manga/${manga?.id}`}
                 key={manga?.attributes.title["en"]}
-                className="text-base hover:text-purple-500"
+                className="line-clamp-2 text-base hover:text-purple-500"
               >
-                {manga?.attributes.title["en"]
-                  ? manga?.attributes.title["en"]
-                  : manga?.attributes.title["ja-ro"]}
+                {manga?.attributes.title["en"] ||
+                  manga?.attributes.title["ja-ro"]}
               </Link>
               <div className="flex gap-1 text-sm">
                 <p className="opacity-75">Genres:</p>

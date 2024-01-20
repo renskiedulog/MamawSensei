@@ -2,7 +2,14 @@ const baseUrl = "https://api.mangadex.org";
 
 export const makeRequest = async (endpoint, params = {}, filter = {}, config = {}) => {
     const url = new URL(`${baseUrl}${endpoint}`);
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+    Object.keys(params).forEach(key => {
+        // Check if the parameter is an array and format accordingly
+        if (Array.isArray(params[key])) {
+            params[key].forEach(value => url.searchParams.append(`${key}[]`, value));
+        } else {
+            url.searchParams.append(key, params[key]);
+        }
+    });
 
     const order = { ...filter };
     for (const [key, value] of Object.entries(order)) {
@@ -101,7 +108,7 @@ export function timeAgo(dateString) {
     const timeDifferenceInSeconds = Math.floor((now - providedDate) / 1000);
 
     if (providedDate > now) {
-        return "Future";
+        return null;
     }
 
     if (timeDifferenceInSeconds < 60) {
@@ -153,3 +160,14 @@ export const Carousel = async () => {
     return mangas;
 };
 
+export const getRandomManga = async () => {
+    const randomManga = await makeRequest("/manga/random");
+    const id = await randomManga?.data?.id;
+    console.log(id)
+    return id;
+}
+
+export const getMangaChapters = async (id) => {
+    const req = await makeRequest(`/manga/${id}/feed`, { translatedLanguage: ["en"] }, {}, { cache: "force-cache" });
+    return req.data;
+}
