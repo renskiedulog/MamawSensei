@@ -66,18 +66,24 @@ body.dark-theme .background {
 .scrollbar::-webkit-scrollbar {
   width: 3px;
 }
+.scrollbar-md::-webkit-scrollbar {
+  width: 8px;
+}
 
 /* Track */
-.scrollbar::-webkit-scrollbar-track {
+.scrollbar::-webkit-scrollbar-track,
+.scrollbar-md::-webkit-scrollbar-track {
   background: transparent;
 }
 
 /* Handle */
-.scrollbar::-webkit-scrollbar-thumb {
+.scrollbar::-webkit-scrollbar-thumb,
+.scrollbar-md::-webkit-scrollbar-thumb {
   background: rgb(168 85 247);
 }
 
 /* Handle on hover */
-.scrollbar::-webkit-scrollbar-thumb:hover {
+.scrollbar::-webkit-scrollbar-thumb:hover,
+.scrollbar-md::-webkit-scrollbar-thumb:hover {
   filter: brightness(0.5);
 }

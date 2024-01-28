@@ -568,15 +568,15 @@ h1.loading-txt:after {
     transform: rotateY(0deg);
   }
   20% {
-    background: #4b1e77;
+    background: #8455b2;
   }
   40% {
-    background: rebeccapurple;
+    background: #8455b2;
     -webkit-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
   }
   100% {
-    background: rebeccapurple;
+    background: #8455b2;
     -webkit-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
   }
@@ -587,14 +587,14 @@ h1.loading-txt:after {
     transform: rotateY(0deg);
   }
   20% {
-    background: #4b1e77;
+    background: #8455b2;
   }
   40% {
-    background: rebeccapurple;
+    background: #8455b2;
     transform: rotateY(-180deg);
   }
   100% {
-    background: rebeccapurple;
+    background: #8455b2;
     transform: rotateY(-180deg);
   }
 }

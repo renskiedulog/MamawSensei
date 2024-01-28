@@ -11,7 +11,7 @@ const page = async () => {
     // Chapters And Top Manga Divider
     <div className="color-text mx-auto grid max-w-screen-2xl grid-cols-1 gap-2 px-5 py-5 md:gap-5 md:px-16 md:py-16 lg:grid-cols-[70%,30%]">
       {/* Left */}
-      <div className="flex w-full flex-col gap-2">
+      <div className="flex w-full flex-col gap-5  ">
         {/* Showcase Manga */}
         <div className="grid gap-2 md:grid-cols-[74%,25%]">
           {/* Top Mangas Carousel */}

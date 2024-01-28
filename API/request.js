@@ -97,7 +97,7 @@ export const fetchMangaInfo = async (mangaId) => {
     const cover = await fetchCoverImages([req.data]);
     const stats = await makeRequest(`/statistics/manga/${mangaId}`);
 
-    Object.assign(cover[0], { stats: stats?.statistics[mangaId] });
+    Object?.assign(cover[0], { stats: stats?.statistics[mangaId] });
     return cover[0];
 }
 
@@ -163,11 +163,47 @@ export const Carousel = async () => {
 export const getRandomManga = async () => {
     const randomManga = await makeRequest("/manga/random");
     const id = await randomManga?.data?.id;
-    console.log(id)
     return id;
 }
 
-export const getMangaChapters = async (id) => {
-    const req = await makeRequest(`/manga/${id}/feed`, { translatedLanguage: ["en"] }, {}, { cache: "force-cache" });
-    return req.data;
+export const fetchAllChapters = async (mangaId) => {
+    let page = 1;
+    const allChapters = [];
+
+    while (true) {
+        const response = await makeRequest(`/manga/${mangaId}/feed`, {
+            translatedLanguage: ["en"],
+            limit: 500,
+            offset: (page - 1) * 500,
+        }, {
+            chapter: "desc",
+        });
+
+        const mangaChapters = response?.data;
+        const newChapters = [];
+        const seenChapterNumbers = new Set();
+
+        mangaChapters?.map((chapter) => {
+            const chapterNumber = parseInt(chapter.attributes.chapter);
+            const pages = chapter.attributes.pages;
+
+            if (pages > 0 && !seenChapterNumbers.has(chapterNumber)) {
+                newChapters.push(chapter);
+                seenChapterNumbers.add(chapterNumber);
+            }
+        });
+
+        if (mangaChapters && mangaChapters.length > 0) {
+            allChapters.push(...newChapters);
+            page++;
+        } else {
+            break; // No more chapters to fetch
+        }
+    }
+    return allChapters;
 }
+
+export const getChapterImages = async (chapterId) => {
+    const req = await makeRequest(`/at-home/server/${chapterId}`, {}, {}, { cache: 'force-cache' });
+    return req;
+};

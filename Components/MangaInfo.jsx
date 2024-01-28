@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ModalHeader from "./ModalHeader";
 
-const MangaInfo = ({ manga, modal }) => {
+const MangaInfo = ({ manga, modal, chaptersCount }) => {
   return (
     <div
       className={`scrollbar pointer-events-auto z-50 flex flex-col overflow-auto rounded-md bg-[#121212] py-3 md:flex-row ${modal ? "fixed left-1/2 top-1/2 max-h-[90vh] min-h-[70vh] w-4/5 translate-x-[-50%] translate-y-[-50%] bg-[#121212] pt-12 text-white" : "background h-max w-full"}`}
@@ -62,12 +62,12 @@ const MangaInfo = ({ manga, modal }) => {
         </div>
       </div>
       {/* Manga Details */}
-      <div className="scrollbar max-h-full p-5 md:overflow-y-auto md:p-0">
+      <div className="scrollbar mr-5 max-h-full p-5 md:overflow-y-auto md:p-0">
         <p className="text-center text-2xl font-bold md:text-left">
           {manga?.attributes?.title["en"] || manga?.attributes?.title["ja-ro"]}
         </p>
         {manga?.attributes?.altTitles && (
-          <div className="flex flex-wrap items-center justify-center gap-2 py-1 text-sm leading-3 opacity-50 md:justify-start md:text-base md:leading-3">
+          <div className="flex flex-wrap items-center justify-center gap-2 py-1 text-sm opacity-50 md:justify-start md:text-base">
             {manga?.attributes?.altTitles.map(
               (title, index) =>
                 (title.en && (
@@ -152,10 +152,8 @@ const MangaInfo = ({ manga, modal }) => {
             <div className="flex flex-col gap-2">
               <h1>Author</h1>
               <p className="font-light opacity-70">asd</p>
-              <h1>Original Language</h1>
-              <p className="font-light opacity-70">
-                {manga?.attributes?.originalLanguage || "-"}
-              </p>
+              <h1>Chapters</h1>
+              <p className="font-light opacity-70">{chaptersCount || "-"}</p>
               <h1>Updated On</h1>
               <p className="font-light opacity-70">
                 {manga?.attributes?.updatedAt

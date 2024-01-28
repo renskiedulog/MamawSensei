@@ -8,7 +8,7 @@ export const MangaFeed = async () => {
       limit: 60,
     },
     { updatedAt: "desc" },
-    { next: { revalidate: 60 } },
+    { cache: "no-cache" },
   );
   const mangas = await fetchCoverImages(req?.data, {
     next: { revalidate: 60 },
